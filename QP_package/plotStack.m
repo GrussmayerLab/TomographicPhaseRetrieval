@@ -64,7 +64,7 @@ switch dim
         title('Sliding along the "Z" direction')
 end
 
-colormap(parula)
+colormap('default')
 colorbar
 caxis('auto')
 
