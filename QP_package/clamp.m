@@ -1,17 +1,24 @@
-function val = clamp(val,minval,maxval)
+% Author : Adrien Descloux
+% Date : 04 March 2018
+% Version : 2.0
 
-if isempty(minval) % no lower bound
-    mapmax = val > maxval;
-    val(mapmax) = maxval;
+% Clamp the variable "val" between [minVal maxVal]
+% if minVal = [] : no lower bound
+% if maxVal = [] : no upper bound
+function val = clamp(val,minVal,maxVal)
+
+if isempty(minVal) % no lower bound
+    mapmax = val > maxVal;
+    val(mapmax) = maxVal;
 end
-if isempty(maxval) % no upper bound
-    mapmin = val < minval;
-    val(mapmin) = minval;
+if isempty(maxVal) % no upper bound
+    mapmin = val < minVal;
+    val(mapmin) = minVal;
 end
-if ~isempty(minval) && ~isempty(maxval)
-    mapmax = val > maxval;
-    val(mapmax) = maxval;
+if ~isempty(minVal) && ~isempty(maxVal)
+    mapmax = val > maxVal;
+    val(mapmax) = maxVal;
     
-    mapmin = val < minval;
-    val(mapmin) = minval;
+    mapmin = val < minVal;
+    val(mapmin) = minVal;
 end

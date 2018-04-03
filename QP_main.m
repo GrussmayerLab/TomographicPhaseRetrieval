@@ -1,4 +1,8 @@
-%% This file contains a basic pipeline for QP retrieval from brightfield stacks
+% Author : Adrien Descloux
+% Date : 04 March 2018
+% Version : 2.0
+% ---------------------------------------
+% This file contains a basic pipeline for QP retrieval from brightfield stacks
 % - 3D image stack loading
 % - 3D stack preprocessing
 % - processing parameters definition
@@ -21,7 +25,7 @@ end
     
 %% Phase retrieval
 % define optics and processing parameters
-run('setup_phase.m');
+s = setup_phase;
 
 % set experimental parameters
 if size(stack,3) == 8 % i.e. MultiPlane data

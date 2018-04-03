@@ -1,6 +1,6 @@
 % Author : Adrien Descloux
-% Date : 15 Feb 2018
-% Version : 2.0
+% Date : 04 March 2018
+% Version : 2.1
 
 % Recover the Cross-spectral density from the intensity stack
 
@@ -13,7 +13,7 @@
 
 % input parameters :
     % stack : 3D intensity stack
-    % mask : use precomputed mask for high-speed reconstruction
+    % mask : use precomputed mask for fast reconstruction
 % output parameters :
     % QP : Quantitative Phase
     % mask : return the mask used for the reconstruction
@@ -27,14 +27,14 @@ if nargin < 3 % if no mask are provided
 th = asin(s.optics.NA/s.optics.n);
 th_ill = asin(s.optics.NA_ill/s.optics.n);
 k0max = s.optics.n*2*pi/(s.optics.lambda - s.optics.dlambda/2);
-k0min = s.optics.n*2*pi/(s.optics.lambda - s.optics.dlambda/2);
+k0min = s.optics.n*2*pi/(s.optics.lambda + s.optics.dlambda/2);
 
 % compute Fourier space grid and the phase mask
 [Kx,Kz] = meshgrid(kx,kz);
 if isempty(s.optics.kzT)
-    mask2D = Kz >= k0max*(1-cos(th_ill));
+    mask2D = Kz > k0max*(1-cos(th_ill));
 else
-    mask2D = Kz >= s.optics.kzT;
+    mask2D = Kz > s.optics.kzT;
 end
 
 if s.proc.applyFourierMask % => compute the CTF mask for extra denoising

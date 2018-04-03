@@ -1,3 +1,9 @@
+% Author : Adrien Descloux
+% Date : 04 March 2018
+% Version : 2.0
+
+% Only for Multi-Plane data
+% Detect and remove the coregistration mask of MP data
 function stack = cropCoregMask(stack)
 
     temp = stack ~= 0;
@@ -8,3 +14,5 @@ function stack = cropCoregMask(stack)
     [~,ax] = max(maskx); [~,bx] = max(maskx(end:-1:1)); bx = length(maskx)-bx+1;
     temp_nPix = min(bx-ax+1,by-ay+1);
     stack = stack(ay:temp_nPix-1+ay,ax:temp_nPix+ax-1,:);
+    
+end

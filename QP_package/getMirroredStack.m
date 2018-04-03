@@ -1,7 +1,16 @@
+% Author : Adrien Descloux
+% Date : 04 March 2018
+% Version : 2.0
+
+% Mirror the data stack according to the structure s (see "setup_phase.m")
+% Compute corresponding reciprocal space kx,kz according to the mirroring
 function [stackM,kx,kz] = getMirroredStack(stack,s)
 
-[Nx,~,Nz] = size(stack);
+[Nx,Ny,Nz] = size(stack);
 
+if Nx ~= Ny % verify that the stack is square
+   stack = cropXY(stack); % if not, crop it
+end
 % compute real space
 x = linspace(-Nx*s.optics.dx/2,Nx*s.optics.dx/2,Nx);
 z = linspace(-Nz*s.optics.dz/2,Nz*s.optics.dz/2,Nz);

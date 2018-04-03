@@ -1,5 +1,9 @@
+% Author : Adrien Descloux
+% Date : 04 March 2018
+% Version : 2.0
+
 % This function crop the input 3D stack to have the size [N,N,~]
-% if N > than Nx or Ny, it make sure that the resulting image is square
+% if N > than Nx or Ny/ not given, it make sure that the resulting image is square
 function out = cropXY(input,N)
 [Nx,Ny,~] = size(input);
 if nargin < 2; N = max(Nx,Ny)+1;end

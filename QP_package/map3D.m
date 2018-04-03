@@ -1,4 +1,8 @@
-% map a kz,klat 2D CTF into its kx,ky,kz 3D counterpart
+% Author : Adrien Descloux
+% Date : 04 March 2018
+% Version : 2.0
+
+% map a kz,klat 2D CTF into its kx,ky,kz 3D circular symetric counterpart
 
 function out = map3D(in)
 

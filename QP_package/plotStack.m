@@ -1,7 +1,13 @@
+% Author : Adrien Descloux
+% Date : 04 March 2018
+% Version : 2.0
+
+% This function opens a basic gui that allows simplified navigation
+% through 3D data stacks
+% if figID is specified, first close(figID), then create figure(figID)
+% if figID is not specified, open a new figure
 function plotStack(data,figID)
 
-% this function create a basic gui that allows to scroll through the stack
-% in the specified dimension
 dim = 2;
 
 [s1,s2,s3] = size(data);
