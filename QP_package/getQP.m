@@ -1,28 +1,47 @@
-% Author : Adrien Descloux
-% Date : 04 March 2018
-% Version : 2.1
-
+% [QP,mask] = getQP(stack,s,mask)
+% ---------------------------------------
+%
 % Recover the Cross-spectral density from the intensity stack
-
-% The theory supporting this m-file can be found in : 
+%
+% Inputs:
+%  stack        Input intensity 3D stack
+%  s            Structure containing all optics and processing parameters
+%                   see "setup_phase_default.m"
+%  mask         Precomputed mask for fast reconstruction
+%
+% Outputs:
+%  QP        	Quantitative phase
+%  mask         Mask used to filter the intensity stack
+%
+% ---------------------------------------
+% A detailled description of the theory supporting this program can be found in : 
 % "Descloux, A., et al. "Combined multi-plane phase retrieval and 
 %  super-resolution optical fluctuation imaging for 4D cell microscopy." 
 %  Nature Photonics 12.3 (2018): 165."
+%
+%   Copyright © 2018 Adrien Descloux - adrien.descloux@epfl.ch, 
+%   École Polytechnique Fédérale de Lausanne, LBEN/LOB,
+%   BM 5.134, Station 17, 1015 Lausanne, Switzerland.
+%
+%  	This program is free software: you can redistribute it and/or modify
+%  	it under the terms of the GNU General Public License as published by
+% 	the Free Software Foundation, either version 3 of the License, or
+%  	(at your option) any later version.
+%
+%  	This program is distributed in the hope that it will be useful,
+%  	but WITHOUT ANY WARRANTY; without even the implied warranty of
+%  	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%  	GNU General Public License for more details.
+%
+% 	You should have received a copy of the GNU General Public License
+%  	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-% the private parameters are optimized for the MP-sofi setup
-
-% input parameters :
-    % stack : 3D intensity stack
-    % mask : use precomputed mask for fast reconstruction
-% output parameters :
-    % QP : Quantitative Phase
-    % mask : return the mask used for the reconstruction
 function [QP,mask] = getQP(stack,s,mask)
 
-if nargin < 3 % if no mask are provided
 % mirror the data and compute adequate Fourier space grid
 [stackM,kx,kz] = getMirroredStack(stack,s);
 
+if nargin < 3 % if no mask are provided
 % compute usefull stuff
 th = asin(s.optics.NA/s.optics.n);
 th_ill = asin(s.optics.NA_ill/s.optics.n);
