@@ -51,9 +51,9 @@ k0min = s.optics.n*2*pi/(s.optics.lambda + s.optics.dlambda/2);
 % compute Fourier space grid and the phase mask
 [Kx,Kz] = meshgrid(kx,kz);
 if isempty(s.optics.kzT)
-    mask2D = Kz > k0max*(1-cos(th_ill));
+    mask2D = Kz >= k0max*(1-cos(th_ill));
 else
-    mask2D = Kz > s.optics.kzT;
+    mask2D = Kz >= s.optics.kzT;
 end
 
 if s.proc.applyFourierMask % => compute the CTF mask for extra denoising
